@@ -7,15 +7,16 @@ const router = express.Router();
 // Create Group
 router.post("/create", authMiddleware, async (req, res) => {
     try {
-        const { name, contributionAmount, frequency, duration, startDate } = req.body;
-
-        if (!name || !contributionAmount || !frequency || !duration || !startDate) {
-            return res.status(400).json({ message: "All fields are required" });
+        const { groupName, maxNoMem, contributionAmount, frequency, duration, startDate } = req.body;
+        console.log(req.body);
+        if (!groupName || !maxNoMem || !contributionAmount || !frequency || !duration || !startDate) {
+            return res.status(400).json({ message: "All fields are required please" });
         }
 
         const newGroup = new Group({
-            name,
-            createdBy: req.user.id,
+            groupName,
+            maxNoMem,
+            //createdBy: req.user.id,
             members: [req.user.id], // Creator is first member
             contributionAmount,
             frequency,
