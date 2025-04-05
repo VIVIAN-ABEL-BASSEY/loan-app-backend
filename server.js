@@ -34,6 +34,7 @@ const connectDB = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
 const groupRoutes = require("./routes/groupRoutes");
+const paymentRoutes = require('./routes/paymentRoutes');
 const transactionRoutes = require("./routes/transactionRoutes");
 const errorHandler = require("./middleware/errorHandler");
 
@@ -50,6 +51,7 @@ app.use(helmet());
 app.use(morgan("dev"));  
 app.use("/api/auth", authRoutes);
 app.use("/api/groups", groupRoutes);
+app.use('/api', paymentRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use(errorHandler);
 
