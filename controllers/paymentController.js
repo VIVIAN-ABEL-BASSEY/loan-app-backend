@@ -29,25 +29,34 @@ exports.initiateCardBinding = async (req, res) => {
 };
 
 exports.verifyCardBinding = async (req, res) => {
-  const reference = req.query.reference;
-
-  if (!reference) {
-    return res.status(400).json({ message: 'Transaction reference is required' });
-  }
-
   try {
+    const { reference } = req.query;
+
+    if (!reference) {
+      return res.status(400).json({ message: 'Transaction reference is required' });
+    }
+
+    // Verify the transaction with Paystack
     const response = await paystack.get(`/transaction/verify/${reference}`);
     const data = response.data.data;
 
+    // Check if transaction was successful
     if (data.status === 'success') {
-      // Here you can store card info or update user record in DB
-      return res.status(200).json({ message: 'Card binding successful', data });
+      // Here you can save user info or card auth to MongoDB
+      console.log('Verification Successful:', data);
+
+      // For now, just return success response
+      return res.status(200).json({
+        message: 'Card binding verified successfully',
+        reference: data.reference,
+        authorization: data.authorization, // this contains card binding info
+        customer: data.customer
+      });
     } else {
-      return res.status(400).json({ message: 'Card binding failed' });
+      return res.status(400).json({ message: 'Verification failed', data });
     }
   } catch (error) {
     console.error(error.response?.data || error.message);
-    res.status(500).json({ message: 'Failed to verify card binding' });
+    res.status(500).json({ message: 'Error verifying card binding' });
   }
 };
-
