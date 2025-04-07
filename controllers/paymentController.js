@@ -10,12 +10,20 @@ exports.initiateCardBinding = async (req, res) => {
 
     const response = await paystack.post('/transaction/initialize', {
       email,
-      amount: amount * 100, // Paystack uses kobo, so convert Naira to Kobo
+      amount: amount * 100,
+      // Optional: set a redirect URL
+      callback_url: 'https://your-frontend-domain.com/payment-status' 
     });
 
-    return res.status(200).json({ authorization_url: response.data.data.authorization_url });
+    // Log the full response
+    console.log('Paystack Init Response:', response.data);
+
+    return res.status(200).json({
+      authorization_url: response.data.data.authorization_url,
+      reference: response.data.data.reference, // include it in the response
+    });
   } catch (error) {
-    console.error(error.response?.data || error.message);
+    console.error('Error initiating card binding:', error.response?.data || error.message);
     res.status(500).json({ message: 'Failed to initiate card binding' });
   }
 };
