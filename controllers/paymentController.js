@@ -1,3 +1,5 @@
+
+const Card = require('../models/Card');
 const paystack = require('../utils/paystack');
 
 exports.initiateCardBinding = async (req, res) => {
@@ -44,6 +46,13 @@ exports.verifyCardBinding = async (req, res) => {
     if (data.status === 'success') {
       // Here you can save user info or card auth to MongoDB
       console.log('Verification Successful:', data);
+      // Save to DB
+      await Card.create({
+        email: data.customer.email,
+        reference: data.reference,
+        authorization: data.authorization,
+        customer_id: data.customer.id,
+      });
 
       // For now, just return success response
       return res.status(200).json({
