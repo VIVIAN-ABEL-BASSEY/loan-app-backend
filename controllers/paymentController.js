@@ -19,3 +19,27 @@ exports.initiateCardBinding = async (req, res) => {
     res.status(500).json({ message: 'Failed to initiate card binding' });
   }
 };
+
+exports.verifyCardBinding = async (req, res) => {
+  const reference = req.query.reference;
+
+  if (!reference) {
+    return res.status(400).json({ message: 'Transaction reference is required' });
+  }
+
+  try {
+    const response = await paystack.get(`/transaction/verify/${reference}`);
+    const data = response.data.data;
+
+    if (data.status === 'success') {
+      // Here you can store card info or update user record in DB
+      return res.status(200).json({ message: 'Card binding successful', data });
+    } else {
+      return res.status(400).json({ message: 'Card binding failed' });
+    }
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+    res.status(500).json({ message: 'Failed to verify card binding' });
+  }
+};
+
