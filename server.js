@@ -36,6 +36,7 @@ const groupRoutes = require("./routes/groupRoutes");
 const paymentRoutes = require('./routes/paymentRoutes');
 const transactionRoutes = require("./routes/transactionRoutes");
 const errorHandler = require("./middleware/errorHandler");
+const identityRoutes = require('./routes/identityRoutes');
 // Initialize Express App
 const app = express();
 // Connect to MongoDB
@@ -47,6 +48,7 @@ app.use(helmet());
 app.use(morgan("dev"));  
 app.use("/api/auth", authRoutes);
 app.use("/api/groups", groupRoutes);
+app.use('/api', identityRoutes);
 app.use('/api', paymentRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use(errorHandler);
