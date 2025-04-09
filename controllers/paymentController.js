@@ -14,7 +14,7 @@ exports.initiateCardBinding = async (req, res) => {
       email,
       amount: amount * 100,
       // Optional: set a redirect URL
-      // callback_url: 'https://your-frontend-domain.com/payment-status' 
+      callback_url: 'https://checkout.paystack.com' 
     });
 
     // Log the full response

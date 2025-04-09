@@ -31,19 +31,15 @@ const cors = require("cors");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const connectDB = require("./config/db");
-
 const authRoutes = require("./routes/authRoutes");
 const groupRoutes = require("./routes/groupRoutes");
 const paymentRoutes = require('./routes/paymentRoutes');
 const transactionRoutes = require("./routes/transactionRoutes");
 const errorHandler = require("./middleware/errorHandler");
-
 // Initialize Express App
 const app = express();
-
 // Connect to MongoDB
 connectDB();
-
 // Middleware
 app.use(express.json());  
 app.use(cors());  
