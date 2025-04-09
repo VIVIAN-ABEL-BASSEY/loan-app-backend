@@ -13,6 +13,7 @@ exports.initiateCardBinding = async (req, res) => {
     const response = await paystack.post('/transaction/initialize', {
       email,
       amount: amount * 100,
+      channels: ['card'] ,// 🎯 This limits options to only card
       // Optional: set a redirect URL
       callback_url: 'https://checkout.paystack.com' 
     });
