@@ -17,10 +17,11 @@ exports.verifyIdentity = async (req, res) => {
     } else {
       return res.status(400).json({ message: "Unsupported identity type" });
     }
-
+    const result = response.data;
     return res.status(200).json({
       message: `${type.toUpperCase()} verification successful`,
-      data: response.data.data
+    //   data: response.data.data
+      data: result.data 
     });
 
   } catch (error) {
