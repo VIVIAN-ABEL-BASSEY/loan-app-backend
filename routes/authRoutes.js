@@ -8,10 +8,15 @@ const router = express.Router();
 router.post(
     "/signup",
     [
-        body("name").notEmpty().withMessage("Name is required"),
+        body("Surname").notEmpty().withMessage("Name is required"),
+        body("Firstname").notEmpty().withMessage("Firstname is required"),
+        body("Middlename").notEmpty().withMessage("Middlename is required"),
         body("email").isEmail().withMessage("Invalid email"),
         body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters long"),
+        body("Phonenumber").isEmail().withMessage("Phonenumber is email"),
+        body("Location ").isEmail().withMessage("Location is email"),
         body("nin").notEmpty().withMessage("NIN is required")
+
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -19,12 +24,12 @@ router.post(
             return res.status(400).json({ errors: errors.array() });
         }
         try {
-            const { name, email, password, nin } = req.body;
+            const {Surname, Firstname, Middlename, email, password, Phonenumber, Location, nin } = req.body;
             let user = await User.findOne({ email });
             if (user) return res.status(400).json({ message: "User already exists" });
             const salt = await bcrypt.genSalt(10);
             const hashedPassword = await bcrypt.hash(password, salt);
-            user = new User({ name, email, password: hashedPassword, nin });
+            user = new User({ Surname, Firstname, Middlename, email, password: hashedPassword, Phonenumber,Location, nin });
             await user.save();
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
             res.status(201).json({ message: "User registered successfully", token });
