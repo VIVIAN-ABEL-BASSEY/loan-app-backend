@@ -1,12 +1,25 @@
 fluterwave password for this project = 8PLSPtWe!gf!Rfv
 
 <!-- https://loan-app-backend-rikc.onrender.com/api/initiate-card-binding
+https://loan-app-backend-rikc.onrender.com/api/groups/create
 https://loan-app-backend-rikc.onrender.com/api/groups/all
 https://loan-app-backend-rikc.onrender.com/api/initiate-card-binding -->
 https://loan-app-backend-rikc.onrender.com/api/verify-card-binding?reference=THE_REFERENCE_CODE
 https://loan-app-backend-rikc.onrender.com/api/verify-identity
+https://loan-app-backend-rikc.onrender.com/api/users/USER_ID_HERE
 
 
 
 
+
+
+
+{
+    "groupName":"now",
+    "maxNoMem":4,
+    "contributionAmount": 500,
+    "frequency": "weekly",
+    "duration":6,
+    "startDate": "2025/05/02"
+} 
 
