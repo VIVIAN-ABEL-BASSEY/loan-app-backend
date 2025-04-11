@@ -8,13 +8,13 @@ const router = express.Router();
 router.post(
     "/signup",
     [
-        body("Surname").notEmpty().withMessage("Name is required"),
+        body("Surname").notEmpty().withMessage("Surname is required"),
         body("Firstname").notEmpty().withMessage("Firstname is required"),
         body("Middlename").notEmpty().withMessage("Middlename is required"),
         body("email").isEmail().withMessage("Invalid email"),
         body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters long"),
-        body("Phonenumber").isEmail().withMessage("Phonenumber is required"),
-        body("Location ").isEmail().withMessage("Location is required"),
+        // body("Phonenumber").isEmail().withMessage("Phonenumber is required"),
+        // body("Location ").isEmail().withMessage("Location is required"),
         body("nin").notEmpty().withMessage("NIN is required")
 
     ],
@@ -24,7 +24,7 @@ router.post(
             return res.status(400).json({ errors: errors.array() });
         }
         try {
-            const {Surname, Firstname, Middlename, email, password, Phonenumber, Location, nin } = req.body;
+            const {Surname, Firstname, Middlename, email, password, nin } = req.body;
             let user = await User.findOne({ email });
             if (user) return res.status(400).json({ message: "User already exists" });
             const salt = await bcrypt.genSalt(10);
