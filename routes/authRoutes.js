@@ -13,8 +13,8 @@ router.post(
         body("Middlename").notEmpty().withMessage("Middlename is required"),
         body("email").isEmail().withMessage("Invalid email"),
         body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters long"),
-        body("Phonenumber").isEmail().withMessage("Phonenumber is email"),
-        body("Location ").isEmail().withMessage("Location is email"),
+        body("Phonenumber").isEmail().withMessage("Phonenumber is required"),
+        body("Location ").isEmail().withMessage("Location is required"),
         body("nin").notEmpty().withMessage("NIN is required")
 
     ],
