@@ -14,7 +14,7 @@ router.post(
         body("email").isEmail().withMessage("Invalid email"),
         body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters long"),
         body("Phonenumber").isLength({ min: 11 }).withMessage("Phonenumber is required"),
-        body("Location ").notEmpty().withMessage("Location is required"),
+        body("Location").notEmpty().withMessage("Location is required"),
         body("nin").notEmpty().withMessage("NIN is required")
 
     ],
