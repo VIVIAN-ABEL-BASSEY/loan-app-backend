@@ -11,6 +11,10 @@ const UserSchema = new mongoose.Schema({
     nin: { type: String, unique: true }, // For KYC verification
     creditAccountLinked: { type: Boolean, default: false },
     debitCardLinked: { type: Boolean, default: false },
+    profilePicture: {
+        type: String, // it will store the image URL
+        default: ''   // or you can set a default image
+      }
 }, { timestamps: true });
 
 

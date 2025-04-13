@@ -2,6 +2,33 @@ const User = require('../models/User');
 const Group = require('../models/Group');
 const Payment = require('../models/Transaction'); // Make sure this exists
 
+exports.uploadProfilePicture = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
+
+    if (!imagePath) {
+      return res.status(400).json({ message: 'No image uploaded' });
+    }
+
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { profilePicture: imagePath },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: 'Profile picture uploaded successfully',
+      profilePicture: user.profilePicture
+    });
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Failed to upload profile picture' });
+  }
+};
+
+
 exports.getUserProfile = async (req, res) => {
   try {
     const userId = req.params.id;

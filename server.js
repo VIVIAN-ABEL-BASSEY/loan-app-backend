@@ -48,6 +48,7 @@ app.use(cors());
 app.use(helmet());  
 app.use(morgan("dev"));  
 app.use("/api/auth", authRoutes);
+app.use('/uploads', express.static('uploads'));
 app.use('/api/users', userRoutes);
 app.use("/api/groups", groupRoutes);
 app.use('/api', identityRoutes);

@@ -3,6 +3,7 @@ fluterwave password for this project = 8PLSPtWe!gf!Rfv
 <!-- https://loan-app-backend-rikc.onrender.com/api/initiate-card-binding
 https://loan-app-backend-rikc.onrender.com/api/groups/create
 https://loan-app-backend-rikc.onrender.com/api/groups/all
+https://loan-app-backend-rikc.onrender.com/api/groups/join/groupId
 https://loan-app-backend-rikc.onrender.com/api/initiate-card-binding -->
 https://loan-app-backend-rikc.onrender.com/api/verify-card-binding?reference=THE_REFERENCE_CODE
 https://loan-app-backend-rikc.onrender.com/api/verify-identity
