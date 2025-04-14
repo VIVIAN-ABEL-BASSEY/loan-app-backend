@@ -5,15 +5,11 @@ const Payment = require('../models/Transaction'); // Make sure this exists
 exports.uploadProfilePicture = async (req, res) => {
   try {
     const userId = req.params.id;
-    const imagePath = req.file ? `/uploads/${req.file.filename}` : null;
-
-    if (!imagePath) {
-      return res.status(400).json({ message: 'No image uploaded' });
-    }
+    const imageUrl = req.file.path; // Cloudinary returns the path as the full URL
 
     const user = await User.findByIdAndUpdate(
       userId,
-      { profilePicture: imagePath },
+      { profilePicture: imageUrl },
       { new: true }
     );
 
@@ -27,6 +23,7 @@ exports.uploadProfilePicture = async (req, res) => {
     res.status(500).json({ message: 'Failed to upload profile picture' });
   }
 };
+
 
 
 exports.getUserProfile = async (req, res) => {
