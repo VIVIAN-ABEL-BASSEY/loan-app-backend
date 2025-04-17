@@ -1,6 +1,7 @@
 
 const Card = require('../models/Card');
 const paystack = require('../utils/paystack');
+const User = require("../models/User")
 
 exports.initiateCardBinding = async (req, res) => {
   try {
@@ -54,7 +55,8 @@ exports.verifyCardBinding = async (req, res) => {
         authorization: data.authorization,
         customer_id: data.customer.id,
       });
-
+      //  Update user status to show card is linked
+      await User.findByIdAndUpdate(req.users.id, { debitCardLinked: true });
       // For now, just return success response
       return res.status(200).json({
         message: 'Card binding verified successfully',
@@ -83,6 +85,9 @@ exports.checkCardBinding = async (req, res) => {
         message: 'User has not bound a card yet'
       });
     }
+
+    // Optional: Also update User if needed
+    await User.findByIdAndUpdate(userId, { debitCardLinked: true });
 
     return res.status(200).json({
       bound: true,
