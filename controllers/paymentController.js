@@ -49,18 +49,20 @@ exports.verifyCardBinding = async (req, res) => {
       // Here you can save user info or card auth to MongoDB
       console.log('Verification Successful:', data);
       // Save to DB
+      const user = await User.findOne({ email: data.customer.email });
       await Card.create({
-        user: req.user.id,
+        user: user._id,
         email: data.customer.email,
         reference: data.reference,
         authorization: data.authorization,
         customer_id: data.customer.id,
       });
       //  Update user status to show card is linked
-      await User.findOneAndUpdate(
-        { email: data.customer.email },
-        { debitCardLinked: true }
-      );
+      await User.findByIdAndUpdate(user._id, { debitCardLinked: true });
+      // await User.findOneAndUpdate(
+      //   { email: data.customer.email },
+      //   { debitCardLinked: true }
+      // );
       // For now, just return success response
       return res.status(200).json({
         message: 'Card binding verified successfully',
