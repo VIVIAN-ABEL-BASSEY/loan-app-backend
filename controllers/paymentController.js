@@ -78,7 +78,7 @@ exports.checkCardBinding = async (req, res) => {
     const userId = req.params.userId;
 
     const card = await Card.findOne({ user: userId });
-
+    console.log(card)
     if (!card) {
       return res.status(200).json({
         bound: false,
