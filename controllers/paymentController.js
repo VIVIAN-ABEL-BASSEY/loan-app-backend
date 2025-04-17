@@ -50,6 +50,7 @@ exports.verifyCardBinding = async (req, res) => {
       console.log('Verification Successful:', data);
       // Save to DB
       await Card.create({
+        user: req.user.id,
         email: data.customer.email,
         reference: data.reference,
         authorization: data.authorization,
