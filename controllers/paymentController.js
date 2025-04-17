@@ -70,3 +70,32 @@ exports.verifyCardBinding = async (req, res) => {
     res.status(500).json({ message: 'Error verifying card binding' });
   }
 };
+
+exports.checkCardBinding = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    const card = await Card.findOne({ user: userId });
+
+    if (!card) {
+      return res.status(200).json({
+        bound: false,
+        message: 'User has not bound a card yet'
+      });
+    }
+
+    return res.status(200).json({
+      bound: true,
+      card: {
+        brand: card.brand,
+        last4: card.last4,
+        expiry: card.expiry,
+        bank: card.bank
+      }
+    });
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ message: 'Failed to check card binding status' });
+  }
+};
