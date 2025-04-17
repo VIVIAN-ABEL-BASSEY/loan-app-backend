@@ -50,6 +50,11 @@ exports.verifyCardBinding = async (req, res) => {
       console.log('Verification Successful:', data);
       // Save to DB
       const user = await User.findOne({ email: data.customer.email });
+      if (!user) {
+        return res.status(404).json({
+          message: 'User not found for this card binding'
+        });
+      }
       await Card.create({
         user: user._id,
         email: data.customer.email,
