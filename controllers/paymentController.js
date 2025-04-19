@@ -64,10 +64,7 @@ exports.verifyCardBinding = async (req, res) => {
       });
       //  Update user status to show card is linked
       await User.findByIdAndUpdate(user._id, { debitCardLinked: true });
-      // await User.findOneAndUpdate(
-      //   { email: data.customer.email },
-      //   { debitCardLinked: true }
-      // );
+     
       // For now, just return success response
       return res.status(200).json({
         message: 'Card binding verified successfully',
@@ -87,7 +84,8 @@ exports.verifyCardBinding = async (req, res) => {
 exports.checkCardBinding = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const card = await Card.findOne({ user: userId });
+    // const card = await Card.findOne({ user: userId });
+    const card = await Card.findOne({ _id: userId });
     console.log(card)
     if (!card) {
       return res.status(200).json({
