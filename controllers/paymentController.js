@@ -86,8 +86,8 @@ exports.verifyCardBinding = async (req, res) => {
 
 exports.checkCardBinding = async (req, res) => {
   try {
-    const userId = req.params.userId;
-
+    // const userId = req.params.userId;
+    const userId = await User.findOne({ email: data.customer.email });
     const card = await Card.findOne({ user: userId });
     console.log(card)
     if (!card) {
@@ -99,7 +99,6 @@ exports.checkCardBinding = async (req, res) => {
 
     // Optional: Also update User if needed
     await User.findByIdAndUpdate(userId, { debitCardLinked: true });
-
     return res.status(200).json({
       bound: true,
       card: {
