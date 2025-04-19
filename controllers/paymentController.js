@@ -86,8 +86,7 @@ exports.verifyCardBinding = async (req, res) => {
 
 exports.checkCardBinding = async (req, res) => {
   try {
-    // const userId = req.params.userId;
-    const userId = await User.findOne({ email: data.customer.email });
+    const userId = req.params.userId;
     const card = await Card.findOne({ user: userId });
     console.log(card)
     if (!card) {
