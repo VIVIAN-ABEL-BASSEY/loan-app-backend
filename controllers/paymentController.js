@@ -96,13 +96,16 @@ exports.checkCardBinding = async (req, res) => {
 
     // Optional: Also update User if needed
     await User.findByIdAndUpdate(userId, { debitCardLinked: true });
+    // Destructuring what the frontend guy needs
+    const { authorization } = card;
     return res.status(200).json({
       bound: true,
       card: {
-        brand: card.brand,
-        last4: card.last4,
-        expiry: card.expiry,
-        bank: card.bank
+        brand: authorization?.brand || 'N/A',
+        last4: authorization?.last4 || '****',
+        expiry: `${authorization?.exp_month}/${authorization?.exp_year}`,
+        bank: authorization?.bank || 'N/A',
+        type: authorization?.card_type || 'N/A'
       }
     });
 
