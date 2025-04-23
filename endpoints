@@ -1,12 +1,12 @@
 fluterwave password for this project = 8PLSPtWe!gf!Rfv
 
-<!--
+
 https://loan-app-backend-rikc.onrender.com/api/users/<userId>/profile-picture
-(This is to upload a profile picture, it's a put request, set the headed to formdata, type=file and upload picture from your device)
+<!-- (This is to upload a profile picture, it's a put request, set the headed to formdata, type=file and upload picture from your device) -->
 https://loan-app-backend-rikc.onrender.com/api/groups/create
 https://loan-app-backend-rikc.onrender.com/api/groups/all
 https://loan-app-backend-rikc.onrender.com/api/groups/join/groupId
-https://loan-app-backend-rikc.onrender.com/api/initiate-card-binding -->
+https://loan-app-backend-rikc.onrender.com/api/initiate-card-binding 
 https://loan-app-backend-rikc.onrender.com/api/initiate-card-binding
 https://loan-app-backend-rikc.onrender.com/api/verify-card-binding?reference=THE_REFERENCE_CODE
 https://loan-app-backend-rikc.onrender.com/api/check-card/userId
