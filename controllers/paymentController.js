@@ -99,7 +99,7 @@ exports.checkCardBinding = async (req, res) => {
     await User.findByIdAndUpdate(userId, { debitCardLinked: true });
     // Destructuring what the frontend guy needs
     const { authorization } = card;
-    consolw.log("htis pt")
+    console.log("htis pt")
     return res.status(200).json({
       bound: true,
       card: {
