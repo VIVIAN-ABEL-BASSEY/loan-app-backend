@@ -33,7 +33,7 @@ router.post(
             await user.save();
             const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
             // i just added an user,_id in the return data
-            res.status(201).json({ message: "User registered successfully", token, user._id });
+            res.status(201).json({ message: "User registered successfully", token, "user id":user._id });
         } catch (error) {
             res.status(500).json({ message: "Server error", error: error.message });
         }
